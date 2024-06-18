@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment Submission </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #logo {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #logo img {
+            max-width: 150px;
+            max-height: 75px;
+        }
+        #replyForm {
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #replyForm input[type="text"],
+        #replyForm textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        #replyForm input[type="file"] {
+            display: none;
+        }
+        #captureImageButton {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #520569;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #captureImageButton:hover {
+            background-color: #520569;
+        }
+        #imagePreview {
+            display: none;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        #imagePreview img {
+            max-width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #replyForm button {
+            padding: 10px 15px;
+            background-color: #520569;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #replyForm button:hover {
+            background-color: #520569;
+        }
+        
+          .form-group label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+
+        .form-group select,
+        .form-group textarea {
+            width: 90%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="file"] {
+            display: none;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </style>
+</head>
+<body>
+    <div id="logo">
+        <img src="data:image/png;base64,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" alt="Company Logo">
+    </div>
+    <form id="replyForm" enctype="multipart/form-data" method="post" action="http://10.32.184.32:8080/reply">
+        <h2>Incident Submission </h2>
+        
+      
+        
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" name="department">
+                    <option value="">Select Department</option>
+                    <option value="Livingspace-Inbound">Livingspace-Inbound</option>
+                    <option value="Livingspace-Collections">Livingspace-Collections</option>
+                    <option value="Livingspace-Outbound">Livingspace-Outbound</option>
+                    <option value="Livingspace-Delivery">Livingspace-Delivery</option>
+                    <option value="Livingspace-Linehaul">Livingspace-Linehaul</option>
+                    <option value="Footwear-Inbound">Footwear-Inbound</option>
+                    <option value="Footwear-Inventory">Footwear-Inventory</option>
+                    <option value="Footwear-Picking">Footwear-Picking</option>
+                    <option value="Footwear-Dispatch">Footwear-Dispatch</option>
+                    <option value="Homeware">Homeware</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="RTT">RTT</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="">Select Category</option>
+                    <option value="Health and Safety">Health & Safety</option>
+                    <option value="Facility and Maintenance">Facility & Maintenance</option>
+                    <option value="Housekeeping">Housekeeping</option>
+                </select>
+            </div>
+            
+            
+      
+        
+        <label for="referenceNumber">Reference Number:</label>
+        <input type="text" id="referenceNumber" name="referenceNumber" required>
+        <label for="replyImage"></label>
+        <input type="file" id="replyImage" name="image" accept="image/*" capture="camera" required>
+        <label id="captureImageButton" for="replyImage">Capture Image</label>
+        <div id="imagePreview">
+            <img id="previewImg" src="#" alt="Image Preview">
+        </div>
+            <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" required></textarea>
+        <button type="submit">Submit Reply</button>
+    </form>
+
+    <script>
+        document.getElementById('replyImage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImg = document.getElementById('previewImg');
+                    previewImg.src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
